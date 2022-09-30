@@ -1,0 +1,52 @@
+000101111213     A* Licensed Materials - Property of IBM
+000102111213     A*    [MLGINQD.DSPF]
+000103111213     A* (C) Copyright IBM Corporation 1993, 2011
+000104111213     A* U.S. Government Users Restricted Rights: Use duplication or
+000105111213     A*      disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+000106120410     A*
+000107130326     A* MLGINQD - Mailing List Inquiry - used by MLGINQR test
+000200080828     A                                      PRINT
+000300080828     A                                      REF(MLGREFP)
+000400080828     A          R DSPLY1                    TEXT('Prompt for account +
+000500080828     A                                      number')
+000600080828     A                                      CA03(93 'Exit')
+000700080828     A                                  1 25'Mailing List Inquiry'
+000800080828     A                                      DSPATR(HI)
+000900080828     A                                  3  2'Account number  . . . . +
+001000080828     A                                      . . . :'
+001100080828     A            ACCT      R     D  I    +1REFFLD(MLACCT)
+001200080828     A  41                                  ERRMSG('The account +
+001300080828     A                                      number cannot be zeros' 41)
+001400080828     A  42                                  ERRMSG('The account +
+001500080828     A                                      number does not exist' 42)
+001600080828     A                                 24  2'F3=Exit'
+001700080828     A          R DSPLY2                    TEXT('MLGMSTP record +
+001800080828     A                                      display')
+001900080828     A                                      CA03(93 'Exit')
+002000080828     A                                  1 25'Mailing List Inquiry'
+002100080828     A                                      DSPATR(HI)
+002200080828     A                                  3  2'Account number  . . . . +
+002300080828     A                                      . . . :'
+002400080828     A            MLACCT    R             +3
+002500080828     A                                  4  2'Account type  . . . . . +
+002600080828     A                                      . . . :'
+002700080828     A            MLTYPE    R             +3
+002800080828     A                                  5  2'Name  . . . . . . . . . +
+002900080828     A                                      . . . :'
+003000080828     A            MLNAME    R             +3
+003100080828     A                                  6  2'Search name . . . . . . +
+003200080828     A                                      . . . :'
+003300080828     A            MLSRCH    R             +3
+003400080828     A                                  7  2'Address . . . . . . . . +
+003500080828     A                                      . . . :'
+003600080828     A            MLADDR    R             +3
+003700080828     A                                  8  2'City  . . . . . . . . . +
+003800080828     A                                      . . . :'
+003900080828     A            MLCITY    R             +3
+004000080828     A                                  9  2'State . . . . . . . . . +
+004100080828     A                                      . . . :'
+004200080828     A            MLSTAT    R             +3
+004300080828     A                                 10  2'Zip code  . . . . . . . +
+004400080828     A                                      . . . :'
+004500080828     A            MLZIP     R             +3
+004600080828     A                                 24  2'F3=Exit'

@@ -1,0 +1,163 @@
+000100111213     A* Licensed Materials - Property of IBM
+000101111213     A*    [MLGMTND.DSPF]
+000102111213     A* (C) Copyright IBM Corporation 1993, 2011
+000103111213     A* U.S. Government Users Restricted Rights: Use duplication or
+000104111213     A*      disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+000105111213     A*
+000107111213     A* MLGMTND - Maintain Mailing List Master - used by MLGMTNR
+000200080828     A                                      PRINT
+000300080828     A                                      REF(MLGREFP)
+000400080828     A          R DSPLY1                    TEXT('Prompt for action +
+000500080828     A                                      and account number')
+000600080828     A                                      CA03(93 'Exit')
+000700080828     A                                      SETOFF(40 'Addl F keys')
+000800080828     A                                      SETOFF(43 'No longer exst')
+000900080828     A                                      SETOFF(45 'Roll EOF')
+001000080828     A                                      SETOFF(49 'Bad sub pgm')
+001100080828     A                                      SETOFF(50 'Protect')
+001200080828     A                                      SETOFF(53 'Protect')
+001300080828     A                                  1 25'Maintain Mailing List +
+001400080828     A                                      Master'
+001500080828     A                                      DSPATR(HI)
+001600080828     A                                  3  2'Action  . . . . . . . . +
+001700080828     A                                      . . . :'
+001800080828     A            ACTION         1   I    +1
+001900080828     A  44                                  ERRMSG('Invalid action' 44)
+002000080828     A                                  3 50'1=Display  2=Change'
+002100080828     A                                  4 50'3=Add      4=Delete'
+002200080828     A                                  5 50'5=Display GE value'
+002300080828     A                                  6 50'6=Name search'
+002400080828     A                                  8  2'Account number  . . . . +
+002500080828     A                                      . . . :'
+002600080828     A            ACCT      R     D  I    +1REFFLD(MLACCT)
+002700080828     A  41                                  ERRMSG('The account +
+002800080828     A                                      number already exists' 41)
+002900080828     A  42                                  ERRMSG('The account +
+003000080828     A                                      number does not exist' 42)
+003100080828     A  46                                  ERRMSG('The account +
+003200080828     A                                      number cannot be zeros' 46)
+003300080828     A  47                                  ERRMSG('End of file has +
+003400080828     A                                      been reached' 47)
+003500080828     A                                  8 50'Numeric 5.0'
+003600080828     A                                 10  2'Search field  . . . . . +
+003700080828     A                                      . . . :'
+003800080828     A            SEARCH    R        I    +1REFFLD(MLSRCH)
+003900080828     A  48                                  ERRMSG('The search field +
+004000080828     A                                      cannot be blank' 48)
+004100080828     A                                 10 50'Char'
+004200080828     A*   39 is set after the 1st display
+004300080828     A  39                             15  2'Last action -'
+004400080828     A  39        ACTTXT        10     15 16
+004500080828     A  45                             16  5'Rollup or rolldown has +
+004600080828     A                                      reached end of file'
+004700080828     A  39N93                          16  5'Account number'
+004800080828     A  39N93     PRVACC    R          16 20REFFLD(MLACCT)
+004900080828     A  39N93     PRVNAM    R          16 30REFFLD(MLNAME)
+005000080828     A  43                             16  5'The account number no +
+005100080828     A                                      longer exists when it +
+005200080828     A                                      was re-accessed'
+005300080828     A  93                             16  5'Function was cancelled'
+005400080828     A  45                             16  5'Rollup or rolldown has +
+005500080828     A                                      reached end of file'
+005600080828     A  49                             16  5'The sub program for name +
+005700080828     A                                      search ended in error'
+005800080828     A                                 19  2'For Options 1-5, enter +
+005900080828     A                                      an Account number.'
+006000080828     A                                 20  2'For Option 6, enter +
+006100080828     A                                      a Search field.'
+006200080828     A                                 24  2'F3=Exit'
+006300080828     A          R DSPLY2                    TEXT('MLGMSTP record +
+006400080828     A                                      display')
+006500080828     A*   51 allows the delete option
+006600080828     A N51                                  CA03(93 'Exit')
+006700080828     A  51                                  CA08(92 'Confirm delete')
+006800080828     A  51                                  CA12(93 'Cancel')
+006900080828     A  40                                  CA11(91 'Delete')
+007000080828     A  40                                  CA06(96 'Change')
+007100080828     A  40                                  ROLLUP(97 'Rollup')
+007200080828     A  40                                  ROLLDOWN(98 'Rolldown')
+007300080828     A                                      SETOFF(50 'Protect')
+007400080828     A                                      SETOFF(51 'Spcl msg')
+007500080828     A                                      SETOFF(52 'Addl F keys')
+007600080828     A                                      SETOFF(59 'HI dlt text')
+007700080828     A                                      SETOFF(64 'Chgd after rel')
+007800080828     A                                      RTNDTA
+007900080828     A                                  1 25'Maintain Mailing List +
+008000080828     A                                      Master'
+008100080828     A                                      DSPATR(HI)
+008200080828     A                                    +8'ACTION - '
+008300080828     A                                      DSPATR(HI)
+008400080828     A            ACTTXT    R             +1REFFLD(ACTTXT *SRC)
+008500080828     A                                      DSPATR(HI)
+008600080828     A                                  3  2'Account number  . . . . +
+008700080828     A                                      . . . :'
+008800080828     A            MLACCT    R     D  B    +3
+008900080828     A  53                                  DSPATR(PR)
+009000080828     A  65                                  ERRMSG('The field is not +
+009100080828     A                                      unique in the master +
+009200080828     A                                      file')
+009300080828     A  71                                  ERRMSG('The field cannot +
+009400080828     A                                      be blank' 71)
+009500080828     A                                  3 50'Name'
+009600080828     A                                  4  2'Account type  . . . . . +
+009700080828     A                                      . . . :'
+009800080828     A            MLTYPE    R        B    +3
+009900080828     A*   50 is set for inquiry or delete
+010000080828     A  50                                  DSPATR(PR)
+010100080828     A                                  4 50'1=Bus 2=Gov 3=Org 4=Sch +
+010200080828     A                                      5=Pvt'
+010300080828     A                                  5 50'9=Oth'
+010400080828     A                                  6  2'Name  . . . . . . . . . +
+010500080828     A                                      . . . :'
+010600080828     A            MLNAME    R        B    +3CHECK(LC)
+010700080828     A  50                                  DSPATR(PR)
+010800080828     A                                  6 60'Char'
+010900080828     A                                  7  2'Search name . . . . . . +
+011000080828     A                                      . . . :'
+011100080828     A            MLSRCH    R        B    +3
+011200080828     A  50                                  DSPATR(PR)
+011300080828     A  72                                  ERRMSG('The field cannot +
+011400080828     A                                      be blank' 72)
+011500080828     A                                  7 60'Char'
+011600080828     A                                  8  2'Address . . . . . . . . +
+011700080828     A                                      . . . :'
+011800080828     A            MLADDR    R        B    +3CHECK(LC)
+011900080828     A  50                                  DSPATR(PR)
+012000080828     A                                  8 60'Char'
+012100080828     A                                  9  2'City  . . . . . . . . . +
+012200080828     A                                      . . . :'
+012300080828     A            MLCITY    R        B    +3CHECK(LC)
+012400080828     A  50                                  DSPATR(PR)
+012500080828     A  73                                  ERRMSG('The field cannot +
+012600080828     A                                      be blank' 73)
+012700080828     A                                  9 60'Char'
+012800080828     A                                 10  2'State . . . . . . . . . +
+012900080828     A                                      . . . :'
+013000080828     A            MLSTAT    R        B    +3
+013100080828     A  50                                  DSPATR(PR)
+013200080828     A  74                                  ERRMSG('The field cannot +
+013300080828     A                                      be blank' 74)
+013400080828     A                                 10 50'Valid state abbreviations'
+013500080828     A                                 11  2'Zip code  . . . . . . . +
+013600080828     A                                      . . . :'
+013700080828     A            MLZIP     R        B    +3
+013800080828     A  50                                  DSPATR(PR)
+013900080828     A  75                                  ERRMSG('The field cannot +
+014000080828     A                                      be zeros' 75)
+014100080828     A                                 11 50'Numeric 5.0'
+014200080828     A  51                             21  2'Press F8 to delete. +
+014300080828     A                                      Use F12 to cancel. You +
+014400080828     A                                      cannot press Enter.'
+014500080828     A  59                                  DSPATR(HI)
+014600080828     A  64                             21  2'The record has been +
+014700080828     A                                      changed since first +
+014800080828     A                                      accessed. Current values +
+014900080828     A                                      displayed.'
+015000080828     A                                      DSPATR(HI)
+015100080828     A N51                             24  2'F3=Exit'
+015200080828     A  40                                +5'F6=Change'
+015300080828     A  40                                +5'F11=Delete'
+015400080828     A  40                                +5'Rollup'
+015500080828     A  40                                +5'Rolldown'
+015600080828     A  51                             24  2'F8=Delete '
+015700080828     A  51                             24 15'F12=Cancel'

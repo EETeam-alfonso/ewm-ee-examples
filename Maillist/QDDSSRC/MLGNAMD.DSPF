@@ -1,0 +1,92 @@
+000100111213     A* Licensed Materials - Property of IBM
+000101111213     A*    [MLGNAMD.DSPF]
+000102111213     A* (C) Copyright IBM Corporation 1993, 2011
+000103111213     A* U.S. Government Users Restricted Rights: Use duplication or
+000104111213     A*      disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+000105111213     A*
+000107111213     A* MLGNAMD  - Mailing list name search - used by MLGNAMR
+000200080828     A                                      PRINT
+000300080828     A                                      REF(MLGREFP)
+000400080828     A          R BOTTOM                    TEXT('Text and messages +
+000500080828     A                                      at bottom of display')
+000600080828     A N67                             21  2'No records exist to +
+000700080828     A                                      be displayed'
+000800080828     A                                      DSPATR(HI)
+000900080828     A                                 24  2'F3=Exit'
+001000080828     A          R SFLRCD                    TEXT('Subfile record')
+001100080828     A                                      SFL
+001200080828     A            SELECT         1   B  7  3VALUES('1' '2' ' ')
+001300080828     A            MLSRCH    R           7  6
+001400080828     A            ABBNAM        13      7 18
+001500080828     A            MLSTAT    R           7 33
+001600080828     A            ABBCTY        13      7 37
+001700080828     A            ABBADD        13      7 52
+001800080828     A            MLTYPE    R           7 67
+001900080828     A            MLACCT    R           7 72
+002000080828     A            MLNAME    R        H
+002100080828     A            MLCITY    R        H
+002200080828     A            MLADDR    R        H
+002300080828     A            MLZIP     R        H
+002400080828     A          R SFLCTL                    TEXT('Sub file control +
+002500080828     A                                      record')
+002600080828     A                                      SFLCTL(SFLRCD)
+002700080828     A                                      SFLSIZ(100)
+002800080828     A                                      SFLPAG(13)
+002900080828     A* 67 is on if there is at least one record to display
+003000080828     A* 68 is used to clear the subfile
+003100080828     A N68 67                               SFLDSP
+003200080828     A N68                                  SFLDSPCTL
+003300080828     A  68                                  SFLCLR
+003400080828     A                                      OVERLAY
+003500080828     A                                      CA03(93 'Exit')
+003600080828     A  71                                  ROLLUP(98 'Rollup')
+003700080828     A  83                                  SFLEND
+003800080828     A            SFLNBR         4  0H      SFLRCDNBR(CURSOR)
+003900080828     A                                  1 20'Mailing List Name Search'
+004000080828     A                                      DSPATR(HI)
+004100080828     A                                  1 60'Search -'
+004200080828     A            SEARCH    R             +1REFFLD(MLSRCH)
+004300080828     A                                  3  2'Type options, press +
+004400080828     A                                      Enter.'
+004500080828     A                                  4  5'1=Display details'
+004600080828     A                                    +3'2=Return with Acct Number'
+004700080828     A                                  6  2'Opt'
+004800080828     A                                      DSPATR(HI)
+004900080828     A                                  6  6'Search'
+005000080828     A                                      DSPATR(HI)
+005100080828     A                                  6 18'Name'
+005200080828     A                                      DSPATR(HI)
+005300080828     A                                  6 33'St'
+005400080828     A                                      DSPATR(HI)
+005500080828     A                                  6 37'City'
+005600080828     A                                      DSPATR(HI)
+005700080828     A                                  6 52'Address'
+005800080828     A                                      DSPATR(HI)
+005900080828     A                                  6 66'Typ'
+006000080828     A                                      DSPATR(HI)
+006100080828     A                                  6 71'Account'
+006200080828     A                                      DSPATR(HI)
+006300080828     A          R DETAIL                    TEXT('MLGMSTP record +
+006400080828     A                                      display')
+006500080828     A                                      CA03(93 'Exit')
+006600080828     A                                  1 25'Mailing List Name Search'
+006700080828     A                                      DSPATR(HI)
+006800080828     A                                  3  2'Account number  . . . . :'
+006900080828     A            MLACCT    R             +3
+007000080828     A                                  4  2'Name  . . . . . . . . . :'
+007100080828     A            MLNAME    R             +3
+007200080828     A                                  5  2'Name search . . . . . . :'
+007300080828     A            MLSRCH    R             +3
+007400080828     A                                  6  2'Address . . . . . . . . :'
+007500080828     A            MLADDR    R             +3
+007600080828     A                                  7  2'City  . . . . . . . . . :'
+007700080828     A            MLCITY    R             +3
+007800080828     A                                  8  2'State   . . . . . . . . :'
+007900080828     A            MLSTAT    R             +3
+008000080828     A                                  9  2'Zip code  . . . . . . . :'
+008100080828     A            MLZIP     R             +3
+008200080828     A                                 10  2'Type  . . . . . . . . . :'
+008300080828     A            MLTYPE    R             +3
+008400080828     A                                    +1'='
+008500080828     A            TYPTXT        15        +1
+008600080828     A                                 24  2'F3=Exit'

@@ -1,0 +1,28 @@
+000101111213/* Licensed Materials - Property of IBM                                   */
+000102111213/*    [PSTBUILD.CLP]                                                      */
+000103111213/* (C) Copyright IBM Corporation 1993, 2011                               */
+000104111213/* U.S. Government Users Restricted Rights: Use duplication or            */
+000105111213/*      disclosure restricted by GSA ADP Schedule Contract with IBM Corp. */
+000107111213             PGM
+000108111213
+000109090817             CHGOBJOWN  OBJ(QSYS/MAILPG) OBJTYPE(*LIB) NEWOWN(SFENG2) +
+000110090817                          CUROWNAUT(*REVOKE)
+000111090817             GRTOBJAUT  OBJ(QSYS/MAILPG) OBJTYPE(*LIB) USER(JAZZADMINS) +
+000112090817                          AUT(*ALL)
+000113090817
+000114090817             CHGOBJOWN  OBJ(QSYS/MAILDT) OBJTYPE(*LIB) NEWOWN(SFENG2) +
+000115090817                          CUROWNAUT(*REVOKE)
+000116090817             GRTOBJAUT  OBJ(QSYS/MAILDT) OBJTYPE(*LIB) USER(JAZZADMINS) +
+000117090817                          AUT(*ALL)
+000118090817
+000119090817             CHGOBJOWN  OBJ(QSYS/MAIL) OBJTYPE(*LIB) NEWOWN(SFENG2) +
+000120090817                          CUROWNAUT(*REVOKE)
+000121090817             GRTOBJAUT  OBJ(QSYS/MAIL) OBJTYPE(*LIB) USER(JAZZADMINS) +
+000122090817                          AUT(*ALL)
+000123090817
+000124090817             RMVLIBLE   LIB(MAILPG)
+000125090817             RMVLIBLE   LIB(MAILDT)
+000126090817             ADDLIBLE   LIB(MAIL)
+000127090817
+000128090817             ENDPGM
+000129090817

@@ -1,0 +1,15 @@
+000100080828/* ================================================================= */
+000101111213/* Licensed Materials - Property of IBM                                   */
+000102111213/*    [MLGMTNS.BNDSRC]                                                    */
+000103111213/* (C) Copyright IBM Corporation 1993, 2011                               */
+000104111213/* U.S. Government Users Restricted Rights: Use duplication or            */
+000105111213/*      disclosure restricted by GSA ADP Schedule Contract with IBM Corp. */
+000107111213/* ================================================================= */
+000200080828/* EXPORT LIST FOR SERVICE PROGRAM MLGMTNS                           */
+000300080828/* ================================================================= */
+000400080828/* HERE ARE THE EXPORTED PROCEDURES                                  */
+000500080828/* ================================================================= */
+000600080828STRPGMEXP PGMLVL( *CURRENT )
+000700080828  EXPORT SYMBOL( "MLGMTNC" )
+000800080828  EXPORT SYMBOL( "MLGMTNR" )
+000900080828ENDPGMEXP

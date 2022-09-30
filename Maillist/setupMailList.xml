@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+
+<!--
+    Licensed Materials - Property of IBM
+    (c) Copyright IBM Corporation 2012. All Rights Reserved.
+   
+    Note to U.S. Government Users Restricted Rights:  
+    Use, duplication or disclosure restricted by GSA ADP Schedule 
+    Contract with IBM Corp. 
+ -->
+	
+<project name="Prototype" default="all" xmlns:ld="antlib:com.ibm.team.enterprise.ibmi.systemdefinition.toolkit">
+	<description>Sample build script</description>
+
+	<property name="sd.prefix"   value=""/>
+	<property name="project.root"   value="../Maillist"/>
+
+	<!-- Initialize the system definition generation tool -->
+	<ld:init
+		repositoryAddress="${repositoryAddress}"
+		userId="${userId}"
+		password="${password}"
+		projectArea="${projectArea}"
+		/>
+
+	<!-- Create resource definitions.  
+	     Not sure how these will be used since load and object libraries are found 
+	     in the project properties, and can be overriden by the build definition -->
+	<target name="resdefs" description="Create resource definitions">
+        <ld:resdef name="${sd.prefix}sourceLibrary" 
+			description="my load library"
+            resourcename="_L"
+			usagetype="0"/>
+		<ld:resdef name="${sd.prefix}objectLibrary" 
+			description="my object library"
+			resourcename="_O"
+			usagetype="0"/>
+	</target>
+
+	<!-- Create search paths -->
+	<target name="searchpaths" description="Create search paths">
+        <ld:searchpath name="${sd.prefix}searchPath" 
+            description="Search Path"
+        	objectlibrary="${sd.prefix}objectLibrary"/>
+	</target>
+
+	<!-- Create translators -->
+	<target name="translators" description="Create translators">
+		<ld:translator name="${sd.prefix}PF" description="PF translator"
+            commandifobjectexists="CHGPF SRCFILE(&amp;L/&amp;F) SRCMBR(&amp;N) FILE(*CURLIB/&amp;O) OPTION(*EVENTF)"
+            commandifobjectdoesntexist="CRTPF SRCFILE(&amp;L/&amp;F) SRCMBR(&amp;N) FILE(*CURLIB/&amp;O) OPTION(*EVENTF)"
+            searchPath="${sd.prefix}searchPath"
+        	outputtype="*FILE">
+		</ld:translator>
+		<ld:translator name="${sd.prefix}LF" description=""
+            commandifobjectexists="DLTF FILE(*CURLIB/&amp;O), CRTLF SRCFILE(&amp;L/&amp;F) SRCMBR(&amp;N) FILE(*CURLIB/&amp;O) OPTION(*EVENTF)"
+            commandifobjectdoesntexist="CRTLF SRCFILE(&amp;L/&amp;F) SRCMBR(&amp;N) FILE(*CURLIB/&amp;O) OPTION(*EVENTF)"
+            searchPath="${sd.prefix}searchPath"
+        	outputtype="*FILE">
+		</ld:translator>
+		<ld:translator name="${sd.prefix}DSPF" description=""
+            commandifobjectexists="CRTDSPF SRCFILE(&amp;L/&amp;F) SRCMBR(&amp;N) FILE(*CURLIB/&amp;O) OPTION(*EVENTF)"
+            commandifobjectdoesntexist="CRTDSPF SRCFILE(&amp;L/&amp;F) SRCMBR(&amp;N) FILE(*CURLIB/&amp;O) OPTION(*EVENTF)"
+            searchPath="${sd.prefix}searchPath"
+        	outputtype="*FILE">
+		</ld:translator>
+		<ld:translator name="${sd.prefix}RPGLE" description=""
+            commandifobjectexists="CRTRPGMOD MODULE(*CURLIB/&amp;O) SRCFILE(&amp;L/&amp;F) SRCMBR(&amp;N) OPTION(*EVENTF)"
+            commandifobjectdoesntexist="CRTRPGMOD MODULE(*CURLIB/&amp;O) SRCFILE(&amp;L/&amp;F) SRCMBR(&amp;N) OPTION(*EVENTF)"
+            searchPath="${sd.prefix}searchPath"
+        	outputtype="*MODULE">
+		</ld:translator>
+		<ld:translator name="${sd.prefix}CLLE" description=""
+            commandifobjectexists="CRTCLMOD MODULE(*CURLIB/&amp;O) SRCFILE(&amp;L/&amp;F) SRCMBR(&amp;N) OPTION(*EVENTF)"
+            commandifobjectdoesntexist="CRTCLMOD MODULE(*CURLIB/&amp;O) SRCFILE(&amp;L/&amp;F) SRCMBR(&amp;N) OPTION(*EVENTF)"
+            searchPath="${sd.prefix}searchPath"
+        	outputtype="*MODULE">
+		</ld:translator>
+		<ld:translator name="${sd.prefix}CLP" description=""
+            commandifobjectexists="CRTCLPGM PGM(*CURLIB/&amp;O) SRCFILE(&amp;L/&amp;F) SRCMBR(&amp;N)"
+            commandifobjectdoesntexist="CRTCLPGM PGM(*CURLIB/&amp;O) SRCFILE(&amp;L/&amp;F) SRCMBR(&amp;N)"
+            searchPath="${sd.prefix}searchPath"
+        	outputtype="*PGM">
+		</ld:translator>
+		<ld:translator name="${sd.prefix}SRVPGM" description="" introspection="true" outputNameKind="USE_VARIABLE" outputName="ORVAR"
+			commandifobjectexists="UPDSRVPGM SRVPGM(*CURLIB/&amp;O) EXPORT(*ALL) &amp;MODULE_ATTRIBUTE &amp;BNDSRVPGM_ATTRIBUTE"
+			commandifobjectdoesntexist="CRTSRVPGM SRVPGM(*CURLIB/&amp;O) EXPORT(*ALL) &amp;MODULE_ATTRIBUTE &amp;BNDSRVPGM_ATTRIBUTE TEXT(&amp;O)"
+            searchPath="${sd.prefix}searchPath"
+        	outputtype="*SRVPGM">
+			<ld:variable name="MODULE_ATTRIBUTE" value="MODULE(defaults)"/>
+			<ld:variable name="BNDSRVPGM_ATTRIBUTE" value=""/>
+			<ld:variable name="ORVAR" value="*"/>
+		</ld:translator>
+		<ld:translator name="${sd.prefix}PGM" description="" introspection="true" outputnamekind="USE_PATTERN" outputname="*"
+			commandifobjectexists="UPDPGM PGM(*CURLIB/&amp;O) &amp;MODULE_ATTRIBUTE &amp;BNDSRVPGM_ATTRIBUTE BNDDIR(&amp;BNDDIR)"
+			commandifobjectdoesntexist="CRTPGM PGM(*CURLIB/&amp;O) &amp;MODULE_ATTRIBUTE &amp;BNDSRVPGM_ATTRIBUTE BNDDIR(&amp;BNDDIR) TEXT(&amp;O)"
+            searchPath="${sd.prefix}searchPath"
+        	outputtype="*PGM">
+			<ld:variable name="MODULE_ATTRIBUTE" value="MODULE(defaults)"/>
+			<ld:variable name="BNDSRVPGM_ATTRIBUTE" value="BNDSRVPGM(defaults)"/>
+			<ld:variable name="BNDDIR" value="*none"/>
+		</ld:translator>
+	</target>
+
+	<!-- Create language definitions -->
+	<target name="langdefs" description="Create language definitions">
+        <ld:langdef name="${sd.prefix}Build_Referenced_Files" translators="${sd.prefix}PF" languagecode="PF" >
+        	<ld:dependencytype name="PF External file" translators="${sd.prefix}PF"/>
+	    	<ld:scanner name="com.ibm.teamp.ibmi.metadata.scanner.dds.pf"/>
+	    </ld:langdef>
+        <ld:langdef name="${sd.prefix}Build_Physical_Files" translators="${sd.prefix}PF" languagecode="PF" >
+        	<ld:dependencytype name="PF External file" translators="${sd.prefix}PF"/>
+	    	<ld:scanner name="com.ibm.teamp.ibmi.metadata.scanner.dds.pf"/>
+	    </ld:langdef>
+        <ld:langdef name="${sd.prefix}Build_Logical_Files" translators="${sd.prefix}LF" languagecode="LF" >
+        	<ld:dependencytype name="LF External file" translators="${sd.prefix}LF"/>
+	    	<ld:scanner name="com.ibm.teamp.ibmi.metadata.scanner.dds.lf"/>
+	    </ld:langdef>
+        <ld:langdef name="${sd.prefix}Build_Display_Files" translators="${sd.prefix}DSPF" languagecode="DSPF" >
+        	<ld:dependencytype name="DSPF External file" translators="${sd.prefix}DSPF"/>
+	    	<ld:scanner name="com.ibm.teamp.ibmi.metadata.scanner.dds.dspf"/>
+	    </ld:langdef>
+        <ld:langdef name="${sd.prefix}Build_RPG_Modules" translators="${sd.prefix}RPGLE" languagecode="RPGLE" >
+        	<ld:dependencytype name="RPGLE COPY" translators="${sd.prefix}RPGLE"/>
+        	<ld:dependencytype name="RPG External File" translators="${sd.prefix}RPGLE"/>
+        	<ld:dependencytype name="RPG External Data" translators="${sd.prefix}RPGLE"/>
+        	<ld:dependencytype name="RPGLE SQL INCLUDE" translators="${sd.prefix}RPGLE"/>
+        	<ld:dependencytype name="RPG COPY" translators="${sd.prefix}RPGLE"/>
+        	<ld:dependencytype name="RPG SQL INCLUDE" translators="${sd.prefix}RPGLE"/>
+        	<ld:scanner name="com.ibm.teamp.ibmi.metadata.scanner.RPGLE"/>
+        </ld:langdef>
+        <ld:langdef name="${sd.prefix}RPG_Include_Files(no_translators)" translators="" languagecode="RPGLE">
+        	<ld:scanner name="com.ibm.teamp.ibmi.metadata.scanner.RPGLE"/>
+        </ld:langdef>
+		<ld:langdef name="${sd.prefix}Build_CL_Modules" translators="${sd.prefix}CLLE" languagecode="CLLE" >
+        	<ld:dependencytype name="ILE CL External file" translators="${sd.prefix}CLLE"/>
+	    	<ld:scanner name="com.ibm.teamp.ibmi.metadata.scanner.ILECL"/>
+	    </ld:langdef>
+		<ld:langdef name="${sd.prefix}Build_CL_OPM_Programs" translators="${sd.prefix}CLP" languagecode="*CLP" >
+        	<ld:dependencytype name="OPM CL External file" translators="${sd.prefix}CLP"/>
+	    	<ld:scanner name="com.ibm.teamp.ibmi.metadata.scanner.OPMCL"/>
+	    </ld:langdef>
+		<ld:langdef name="${sd.prefix}Build_SRVPGM" translators="${sd.prefix}SRVPGM" languagecode="SRVPGM" >
+        	<ld:dependencytype name="SRVPGM External file" translators="${sd.prefix}SRVPGM"/>
+        	<ld:dependencytype name="SRVPGM Export file" translators="${sd.prefix}SRVPGM"/>
+	    	<ld:scanner name="com.ibm.teamp.ibmi.metadata.scanner.SRVPGM"/>
+	    </ld:langdef>
+		<ld:langdef name="${sd.prefix}Build_PGM" translators="${sd.prefix}PGM" languagecode="PGM" >
+        	<ld:dependencytype name="PGM External file" translators="${sd.prefix}PGM"/>
+	    	<ld:scanner name="com.ibm.teamp.ibmi.metadata.scanner.PGM"/>
+	    </ld:langdef>
+	</target>
+	<!-- Resolve metadata -->
+	<target name="resolvemetadata" description="Resolve metadata">
+		<ld:filemetadata>
+			<ld:filemetadatarule match="QLNKSRC/MLGMTNS\.SRVPGMSRC$" name="team.enterprise.build.var.ORVAR" value="=========="/>
+		</ld:filemetadata>
+		<ld:resolvemetadata sourcelibrary="${sd.prefix}sourceLibrary" objectlibrary="${sd.prefix}objectLibrary">
+            <ld:langdefrule match="QDDSSRC/MLGREFP\.PF$" languagedefinition="${sd.prefix}Build_Referenced_Files"/>
+            <ld:langdefrule match="QDDSSRC/.+\.PF$" languagedefinition="${sd.prefix}Build_Physical_Files"/>
+            <ld:langdefrule match="QDDSSRC/.+\.LF$" languagedefinition="${sd.prefix}Build_Logical_Files"/>
+            <ld:langdefrule match="QDDSSRC/.+\.DSPF$" languagedefinition="${sd.prefix}Build_Display_Files"/>
+            <ld:langdefrule match="QCLSRC/.+\.CLLE$" languagedefinition="${sd.prefix}Build_CL_Modules"/>
+            <ld:langdefrule match="BUILD/.+\.CLLE$" languagedefinition="${sd.prefix}Build_CL_Modules"/>
+            <ld:langdefrule match="BUILD/.+\.CLP$" languagedefinition="${sd.prefix}Build_CL_OPM_Programs"/>
+            <ld:langdefrule match="QRPGLESRC/.+\.RPGLE$" languagedefinition="${sd.prefix}Build_RPG_Modules"/>
+            <ld:langdefrule match="QRPGLEINC/.+\.RPGLE$" languagedefinition="${sd.prefix}RPG_Include_Files(no_translators)"/>
+			<ld:langdefrule match="QLNKSRC/.+\.PGMSRC$" languagedefinition="${sd.prefix}Build_PGM"/>
+    		<ld:langdefrule match="QLNKSRC/.+\.SRVPGMSRC$" languagedefinition="${sd.prefix}Build_SRVPGM"/>
+		</ld:resolvemetadata>
+	</target>
+
+	<!-- Set source code data. -->
+	<target name="sourcecodedata" description="Set source code data">
+		<ld:sourcecodedata/>
+	</target>
+
+	<!-- Delete existing data set definitions, translators and language definitions -->
+	<target name="delete" 
+		description="Delete existing data set definitions, translators and language definitions">
+		<ld:deletelangdefs/>
+		<ld:deletetranslators/>
+		<ld:deletesearchpaths/>
+		<ld:deleteresdefs/>
+    	<ld:resolvemetadata clean="true"/>
+	</target>
+	
+	<!-- Export system definitions to an XML file -->
+	<target name="export" description="Export">
+		<ld:export file="C:/tmp/exported.xml"/>
+	</target>
+	<!-- full build -->
+	<target name="all" depends="resdefs,searchpaths,translators,langdefs,resolvemetadata,sourcecodedata" description="full build"/> 
+</project>
+

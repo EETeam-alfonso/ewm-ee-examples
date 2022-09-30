@@ -1,0 +1,39 @@
+000100111213     A* Licensed Materials - Property of IBM
+000101111213     A*    [MLGREFP.PF]
+000102111213     A* (C) Copyright IBM Corporation 1993, 2011
+000103111213     A* U.S. Government Users Restricted Rights: Use duplication or
+000104111213     A*      disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+000105111213     A*
+000107111213     A* MLGREFP - Mailing list field reference file
+000200080828     A          R MLGREFR                   TEXT('Mailing list ref')
+000300080828     A            MLACCT         5  0       COLHDG('Account' +
+000400080828     A                                      'number')
+000500080828     A                                      EDTCDE(X)
+000600080828     A            MLTYPE         1          COLHDG('Type')
+000700080828     A                                      VALUES('1' '2' '3' +
+000800080828     A                                      '4' '5' '9')
+000900080828     A                                      TEXT('Acct type- +
+001000080828     A                                      1=Bus 2=Gov 3=Org +
+001100080828     A                                      4=Sch 5= Pvt 9=Oth')
+001200080828     A            MLNAME        20          COLHDG('Name')
+001300080828     A            MLSRCH        10          COLHDG('Search')
+001400080828     A                                      TEXT('Search field for +
+001500080828     A                                      name search')
+001600080828     A            MLADDR        20          COLHDG('Addr')
+001700080828     A            MLCITY        20          COLHDG('City')
+001800080828     A            MLSTAT         2          COLHDG('State')
+001900080828     A                                      VALUES('AL' 'AK' 'AZ' +
+002000080828     A                                      'AR' 'CA' 'CO' 'CT' +
+002100080828     A                                      'DE' 'DC' 'FL' 'GA' +
+002200080828     A                                      'HI' 'ID' 'IL' 'IN' +
+002300080828     A                                      'IA' 'KS' 'KY' 'LA' +
+002400080828     A                                      'ME' 'MD' 'MA' 'MI' +
+002500080828     A                                      'MN' 'MS' 'MO' 'MT' +
+002600080828     A                                      'NE' 'NV' 'NH' 'NJ' +
+002700080828     A                                      'NM' 'NY' 'NC' 'ND' +
+002800080828     A                                      'OH' 'OK' 'OR' 'PA' +
+002900080828     A                                      'RI' 'SC' 'SD' 'TN' +
+003000080828     A                                      'TX' 'UT' 'VT' 'VA' +
+003100080828     A                                      'WA' 'WV' 'WI' 'WY')
+003200080828     A            MLZIP          5  0       COLHDG('ZIP' 'code')
+003300080828     A                                      EDTCDE(X)

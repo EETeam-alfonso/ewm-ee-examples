@@ -1,0 +1,20 @@
+000000000010/***************************************/        
+000000000020/* MLGMTNS.SRVPGMSRC */                          
+000000000030/* Generated from BABMLINTOB/MLGMTNS *SRVPGM.  */
+000000000040/* Generated at 2012-01-20 15:37:02  */          
+000000000050/* Generator version: 1.0A */                    
+000000000060/***************************************/        
+000000000070PGM PARM(&OBJLIB &SRCLIB)                        
+000000000080  DCL VAR(&OBJLIB) TYPE(*CHAR) LEN(10)           
+000000000090  DCL VAR(&SRCLIB) TYPE(*CHAR) LEN(10)           
+000000000100  CRTSRVPGM SRVPGM(&OBJLIB/MLGMTNS) +            
+000000000110   EXPORT(*SRCFILE) +                            
+000000000120    SRCFILE(&SRCLIB/QSRVSRC) +                   
+000000000130    SRCMBR(MLGMTNS) +                            
+000000000140   MODULE( +                                     
+000000000150    MLGMTNC +                            
+000000000160    MLGMTNR +                            
+000000000170    MLGNAMR) +                           
+000000000180   BNDSRVPGM()                                   
+000000000190                                                 
+000000000200ENDPGM                                           

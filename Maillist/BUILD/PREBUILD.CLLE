@@ -1,0 +1,28 @@
+000101111213/* Licensed Materials - Property of IBM                                   */
+000102111213/*    [PREBUILD.CLP]                                                      */
+000103111213/* (C) Copyright IBM Corporation 1993, 2011                               */
+000104111213/* U.S. Government Users Restricted Rights: Use duplication or            */
+000105111213/*      disclosure restricted by GSA ADP Schedule Contract with IBM Corp. */
+000106111213             PGM
+000108111213
+000109090817             CHKOBJ     OBJ(MAIL) OBJTYPE(*LIB)
+000110090817             MONMSG     MSGID(CPF9801) EXEC(GOTO ERROR)
+000111090817             ADDLIBLE   LIB(MAIL)
+000112090817
+000113090817             CHKOBJ     OBJ(MAILDT) OBJTYPE(*LIB)
+000114090817             MONMSG     MSGID(CPF9801) EXEC(CRTLIB LIB(MAILDT) TEXT('DATA +
+000115090817                          LIBRARY'))
+000116090817             ADDLIBLE   LIB(MAILDT)
+000117090817
+000118090817             CHKOBJ     OBJ(MAILPG) OBJTYPE(*LIB)
+000119090817             MONMSG     MSGID(CPF9801) EXEC(CRTLIB LIB(MAILPG) +
+000120090817                          TEXT('PROGRAM LIBRARY'))
+000121090817             ADDLIBLE   LIB(MAILPG)
+000122090817             GOTO       CMDLBL(END)
+000123090817
+000124090817 ERROR:      SNDMSG     MSG('build is failed') TOUSR(*SYSOPR)
+000125090817
+000126090817 END:
+000127090817
+000128090817             ENDPGM
+000129090817

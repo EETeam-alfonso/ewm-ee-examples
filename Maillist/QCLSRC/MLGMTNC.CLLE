@@ -1,0 +1,19 @@
+000100111213/* Licensed Materials - Property of IBM                                   */
+000101111213/*    [MLGMTNC.CLLE]                                                      */
+000102111213/* (C) Copyright IBM Corporation 1993, 2011                               */
+000103111213/* U.S. Government Users Restricted Rights: Use duplication or            */
+000104111213/*      disclosure restricted by GSA ADP Schedule Contract with IBM Corp. */
+000105111213
+000107111213/* MLGMTNC - Maintain mailing list master                        */
+000200080828             PGM
+000300080828             DCL        &RTNCDE *CHAR LEN(8)
+000301080831
+000400081110     /*      CALLPRC    PRC(MLGMTNR) /* BUG */
+000401081110             CALLPRC    PRC(MLGMTNR) PARM(&RTNCDE) /* FIX */
+000402080831
+000403080831
+000500080828             IF         (&RTNCDE *EQ 'GOOD') RETURN
+000600080828             SNDPGMMSG  MSGID(CPF9898) MSGF(QCPFMSG) MSGTYPE(*ESCAPE) +
+000700080828                          MSGDTA('Bad return code of ' *CAT +
+000800080828                          &RTNCDE *TCAT ' from MLGMTNR')
+000900080828             ENDPGM

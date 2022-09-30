@@ -1,0 +1,12 @@
+000100111213     A* Licensed Materials - Property of IBM
+000101111213     A*    [MLGMSTL.LF]
+000102111213     A* (C) Copyright IBM Corporation 1993, 2011
+000103111213     A* U.S. Government Users Restricted Rights: Use duplication or
+000104111213     A*      disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+000105111213     A*
+000107111213     A* MLGMSTL - Mailing list label printing logical
+000200080828     A          R MLGMSTR                   PFILE(MLGMSTP)
+000300080828     A          K MLZIP
+000400080828     A          K MLSTAT
+000500080828     A          K MLCITY
+000600080828     A          K MLSRCH

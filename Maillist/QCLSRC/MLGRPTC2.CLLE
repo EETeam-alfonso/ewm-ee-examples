@@ -1,0 +1,14 @@
+000100111213/* Licensed Materials - Property of IBM                                   */
+000101111213/*    [MLGRPTC2.CLP]                                                      */
+000102111213/* (C) Copyright IBM Corporation 1993, 2011                               */
+000103111213/* U.S. Government Users Restricted Rights: Use duplication or            */
+000104111213/*      disclosure restricted by GSA ADP Schedule Contract with IBM Corp. */
+000105111213
+000106111213/* MLGRPTC2 - General purpose query of MLGMSTP                    */
+000200080828             PGM
+000300080828             OVRDBF     MLGMSTP TOFILE(MLGMSTL3)
+000400080828             OVRPRTF    QPRINT SPLFNAME(MLGRPT)
+000500080828             CALLPRC    MLGRPTR
+000600080828             SNDPGMMSG  MSG('Special report printed to MLGRPT') +
+000700080828                          MSGTYPE(*COMP)
+000800080828             ENDPGM

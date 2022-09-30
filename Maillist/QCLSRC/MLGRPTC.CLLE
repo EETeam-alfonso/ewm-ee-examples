@@ -1,0 +1,11 @@
+000100111213/* Licensed Materials - Property of IBM                                   */
+000101111213/*    [MLGRPTC.CLP]                                                       */
+000102111213/* (C) Copyright IBM Corporation 1993, 2011                               */
+000103111213/* U.S. Government Users Restricted Rights: Use duplication or            */
+000104111213/*      disclosure restricted by GSA ADP Schedule Contract with IBM Corp. */
+000105111213
+000106111213/* MLGRPTC - Print one liner with MLGMSTL2 LF                    */
+000200080828             PGM
+000300080828             OVRDBF     MLGMSTP TOFILE(MLGMSTL2)
+000400080828             CALLPRC    MLGRPTR
+000500080828             ENDPGM

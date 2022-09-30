@@ -1,0 +1,21 @@
+000100111213     A* Licensed Materials - Property of IBM
+000101111213     A*    [MLGMSTP.PF]
+000102111213     A* (C) Copyright IBM Corporation 1993, 2011
+000103111213     A* U.S. Government Users Restricted Rights: Use duplication or
+000104111213     A*      disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+000105111213     A*
+000107111213     A* MLGMSTP - Mailing list master physical file
+000200080828     A                                      REF(MLGREFP)
+000300080828     A                                      UNIQUE
+000400080828     A          R MLGMSTR                   TEXT('Mailing list +
+000500080828     A                                      master record')
+000600090423     A            MLSTAT2        5P 0       COLHDG('TEST')
+000700080828     A            MLACCT    R
+000800080828     A            MLTYPE    R
+000900080828     A            MLNAME    R
+001000080828     A            MLSRCH    R
+001100080828     A            MLADDR    R
+001200080828     A            MLCITY    R
+001300080828     A            MLSTAT    R
+001400080828     A            MLZIP     R
+001500080828     A          K MLACCT

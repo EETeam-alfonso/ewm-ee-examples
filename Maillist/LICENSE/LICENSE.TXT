@@ -1,0 +1,10 @@
+Licensed Materials - Property of IBM 
+   [ Maillist ] 
+(C) Copyright IBM Corporation 1993, 2011.
+U.S. Government Users Restricted Rights: 
+   Use duplication or disclosure restricted by 
+   GSA ADP Schedule Contract with IBM Corp.
+
+License terms that govern use of this code can be found here: 
+   https://jazz.net/pub/samples-license-1.html
+     

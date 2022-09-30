@@ -1,0 +1,39 @@
+000100111213     A* Licensed Materials - Property of IBM
+000101111213     A*    [MLGMNUD.DSPF]
+000102111213     A* (C) Copyright IBM Corporation 1993, 2011
+000103111213     A* U.S. Government Users Restricted Rights: Use duplication or
+000104111213     A*      disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+000105111213     A*
+000107111213     A* MLGMNUD - Mailing list menu - used by MLGMNUC
+000200080828     A                                      PRINT
+000300080828     A          R MENU                      TEXT('Mailing menu')
+000400080828     A                                      CA03(93 'Exit')
+000500080828     A                                      SETOFF(71 'Bad select')
+000600080828     A                                      SETOFF(51 'Not auth')
+000700080828     A                                  1 25'Mailing List Menu'
+000800080828     A                                      DSPATR(HI)
+000900080828     A                                  2 64'System:'
+001000080828     A            SYSNAM         8        +2
+001100080828     A                                  3  2'Select one of the +
+001200080828     A                                      following'
+001300080828     A                                  5  7'1. Inquire into Mailing +
+001400080828     A                                      List Master'
+001500080828     A                                  6  7'2. Maintain Mailing +
+001600080828     A                                      List Master'
+001700080828     A                                  7  7'3. Submit listing by +
+001800080828     A                                      account number'
+001900080828     A                                  8  7'4. Submit special +
+002000080828     A                                      analysis report'
+002100080828     A                                  9  7'5. Query Mailing List +
+002200080828     A                                      file'
+002300080828     A  51                             16  2'You are not authorized +
+002400080828     A                                      to change the master +
+002500080828     A                                      file.'
+002600080828     A                                      DSPATR(HI)
+002700080828     A                                 19  2'Selection'
+002800080828     A                                 20  2'===>'
+002900080828     A            SELECT         2   B    +1
+003000080828     A                                 23  2'F3=Exit'
+003100080828     A  71                             24  2'Specified menu option +
+003200080828     A                                      not correct'
+003300080828     A                                      DSPATR(HI)

@@ -1,0 +1,50 @@
+000101111213/* Licensed Materials - Property of IBM                                   */
+000102111213/*    [MLGMNUC.CLP]                                                       */
+000103111213/* (C) Copyright IBM Corporation 1993, 2011                               */
+000104111213/* U.S. Government Users Restricted Rights: Use duplication or            */
+000105111213/*      disclosure restricted by GSA ADP Schedule Contract with IBM Corp. */
+000106111213
+000107111213/* MLGMNUC - Mailing list menu     TEST                             */
+000200080828             PGM
+000300080828             DCLF       MLGMNUD
+000400080828             DCL        &SYSNAM *CHAR LEN(8)
+000500080828             RTVNETA    SYSNAME(&SYSNAM)
+000600080828 LOOP:       CHGVAR     &SELECT ' '
+000700080828 DISPLAY:    SNDRCVF    /* Prompt with menu and wait for response */
+000800080828             IF         (&IN93 *EQ '1') DO /* CF3 */
+000900080828             RETURN     /* Normal end of program */
+001000080828             ENDDO      /* CF3 */
+001100080828 SELECT1:    IF         ((&SELECT *EQ '1 ') *OR +
+001200080828                          (&SELECT *EQ ' 1')) DO /* Select 1 */
+001300080828             CALLPRC    MLGINQR
+001400080828             GOTO       LOOP
+001500080828             ENDDO      /* Select 1 */
+001600080828 SELECT2:    IF         ((&SELECT *EQ '2 ') *OR +
+001700080828                          (&SELECT *EQ ' 2')) DO /* Select 2 */
+001800080828             CHKOBJ     OBJ(MLGMSTP) OBJTYPE(*FILE) AUT(*CHANGE)
+001900080828             MONMSG     MSGID(CPF9802) EXEC(DO) /* Not authorized */
+002000080828             CHGVAR     &IN51 '1' /* Set for not auth message */
+002100080828             GOTO       DISPLAY
+002200080828             ENDDO      /* Not authorized */
+002300080828             CALLPRC    MLGMTNC
+002400080828             GOTO       LOOP
+002500080828             ENDDO      /* Select 2 */
+002600080828 SELECT3:    IF         ((&SELECT *EQ '3 ') *OR +
+002700080828                          (&SELECT *EQ ' 3')) DO /* Select 3 */
+002800080828             SBMJOB     JOB(MLGRPT) RQSDTA('CALL MLGRPTC')
+002900080828             GOTO       LOOP
+003000080828             ENDDO      /* Select 3 */
+003100080828 SELECT4:    IF         ((&SELECT *EQ '4 ') *OR +
+003200080828                          (&SELECT *EQ ' 4')) DO /* Select 4 */
+003300080828             SBMJOB     JOB(MLGRPT) RQSDTA('CALL MLGRPTC2')
+003400080828             GOTO       LOOP
+003500080828             ENDDO      /* Select 4 */
+003600080828 SELECT5:    IF         ((&SELECT *EQ '5 ') *OR +
+003700080828                          (&SELECT *EQ ' 5')) DO /* Select 5 */
+003800080828             STRQRY
+003900080828             GOTO       LOOP
+004000080828             ENDDO      /* Select 5 */
+004100080828                        /* Bad selection, set error message */
+004200080828             CHGVAR     &IN71 '1'
+004300080828             GOTO       DISPLAY
+004400080828             ENDPGM
