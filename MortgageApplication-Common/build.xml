@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+    Licensed Materials - Property of IBM
+    (c) Copyright IBM Corporation 2011. All Rights Reserved.
+   
+    Note to U.S. Government Users Restricted Rights:  
+    Use, duplication or disclosure restricted by GSA ADP Schedule 
+    Contract with IBM Corp. 
+ -->
+
+<project xmlns:ac="antlib:net.sf.antcontrib" xmlns:antz="antlib:com.ibm.teamz.build.ant" xmlns:rsel="antlib:org.apache.tools.ant.types.resources.selectors" default="all" name="RTCz build">
+   <description>Mortgage Application Sample Build</description>
+
+   <taskdef classname="com.ibm.team.build.ant.task.ArtifactFilePublisherTask" name="artifactFilePublisher"/>
+   <property name="teamz.build.publishoutputs.dds" value=""/>
+
+   <import file="${teamz.scm.fetchDestination}/macrodefs.xml"/>
+   
+   <target description="Compile" name="compile">
+      <startBuildActivity autoComplete="true" buildResultUUID="${buildResultUUID}" label="Compile" parentActivityId="${teamz.build.ant.buildActivityId}" passwordFile="${passwordFile}" repositoryAddress="${repositoryAddress}" userId="${userId}"/>
+      <antz:compile buildResultUUID="${buildResultUUID}" passwordFile="${passwordFile}" repositoryAddress="${repositoryAddress}" userId="${userId}">
+         <restrict>
+            <antz:buildableset buildableList="${teamz.scm.fetchDestination}/buildableFiles.xml"/>
+            <antz:langdefselector name="BMS map processing"/>
+         </restrict>
+      </antz:compile>
+      <antz:compile buildResultUUID="${buildResultUUID}" passwordFile="${passwordFile}" repositoryAddress="${repositoryAddress}" userId="${userId}">
+         <restrict>
+            <antz:buildableset buildableList="${teamz.scm.fetchDestination}/buildableFiles.xml"/>
+            <antz:langdefselector name="COBOL compilation"/>
+         </restrict>
+      </antz:compile>
+      <antz:compile buildResultUUID="${buildResultUUID}" passwordFile="${passwordFile}" repositoryAddress="${repositoryAddress}" userId="${userId}">
+         <restrict>
+            <antz:buildableset buildableList="${teamz.scm.fetchDestination}/buildableFiles.xml"/>
+            <antz:langdefselector name="COBOL compilation and link-edit"/>
+         </restrict>
+      </antz:compile>
+      <antz:compile buildResultUUID="${buildResultUUID}" passwordFile="${passwordFile}" repositoryAddress="${repositoryAddress}" userId="${userId}">
+         <restrict>
+            <antz:buildableset buildableList="${teamz.scm.fetchDestination}/buildableFiles.xml"/>
+            <antz:langdefselector name="COBOL compilation (CICS) and link-edit"/>
+         </restrict>
+      </antz:compile>
+      <antz:compile buildResultUUID="${buildResultUUID}" passwordFile="${passwordFile}" repositoryAddress="${repositoryAddress}" userId="${userId}">
+         <restrict>
+            <antz:buildableset buildableList="${teamz.scm.fetchDestination}/buildableFiles.xml"/>
+            <antz:langdefselector name="COBOL compilation (CICS&amp;DB2) and link-edit"/>
+         </restrict>
+      </antz:compile>
+      <antz:compile buildResultUUID="${buildResultUUID}" passwordFile="${passwordFile}" repositoryAddress="${repositoryAddress}" userId="${userId}">
+         <restrict>
+            <antz:buildableset buildableList="${teamz.scm.fetchDestination}/buildableFiles.xml"/>
+            <antz:langdefselector name="Copybook (no translators)"/>
+         </restrict>
+      </antz:compile>
+   </target>
+   	
+   <target depends="compile" description="Full build" name="all"/>
+
+</project>
