@@ -2,7 +2,7 @@
 000201111213/*    [BUILD.CLP]                                                         */
 000202111213/* (C) Copyright IBM Corporation 1993, 2011                               */
 000203111213/* U.S. Government Users Restricted Rights: Use duplication or            */
-000204111213/*   A  disclosure restricted by GSA ADP Schedule Contract with IBM Corp. */
+000204111213/*   B  disclosure restricted by GSA ADP Schedule Contract with IBM Corp. */
 000205111213             PGM        PARM(&LNAME)
 000206111213
 000300080910/* This CL program takes a single parameter (library name) and builds all */
