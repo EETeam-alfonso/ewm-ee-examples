@@ -2,7 +2,7 @@
 000102111213/*    [PREBUILD.CLP]                                                      */
 000103111213/* (C) Copyright IBM Corporation 1993, 2011                               */
 000104111213/* U.S. Government Users Restricted Rights: Use duplication or            */
-000105111213/*      disclosure restricted by GSA ADP Schedule Contract with IBM Corp. */
+000105111213/* A    disclosure restricted by GSA ADP Schedule Contract with IBM Corp. */
 000106111213             PGM
 000108111213
 000109090817             CHKOBJ     OBJ(MAIL) OBJTYPE(*LIB)
